@@ -1,7 +1,7 @@
-import AudioPlayer from "../index"
-
+let AudioPlayer = require("../index")
 describe('Test', function () {
     it('should log', function () {
-        AudioPlayer.createAPlayer()
+        let mk = new AudioPlayer()
+        new AudioPlayer().createAPlayer()
     });
 });

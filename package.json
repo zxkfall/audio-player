@@ -4,7 +4,8 @@
   "description": "This is a module than can play music or other audio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "live-server --port=8080"
   },
   "repository": {
     "type": "git",
@@ -23,5 +24,17 @@
   "homepage": "https://github.com/zxkfall/audio-player#readme",
   "dependencies": {
     "@types/node": "^17.0.24"
+  },
+  "devDependencies": {
+    "eslint": "^8.13.0",
+    "eslint-config-react-app": "^7.0.1",
+    "jest": "^27.5.1",
+    "live-server": "^1.2.1"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   }
 }

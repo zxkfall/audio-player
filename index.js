@@ -1,9 +1,17 @@
-const AudioPlayer = (args) => {
-    exports.createAPlayer = createAudioPlayer
-}
 const createAudioPlayer = () => {
     console.log('CreateAudioPlayer')
-    let ms ="ddd"
-    console.log(ms)
+    let audio = document.createElement('audio');
+    let body = document.querySelector('body');
+    body.appendChild(audio)
+    let section = document.createElement('section');
+    section.textContent = 'sdsds'
+    body.appendChild(section)
+
+};
+
+const AudioPlayer = function () {
+    console.log('new')
+    this.createAPlayer = createAudioPlayer
 }
+
 module.exports = AudioPlayer
