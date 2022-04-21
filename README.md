@@ -1,8 +1,6 @@
-# @zxkfall/audio-player develop log
+# @zxkfall/audio-player
 
-## Version 1
 
-### Tasking
 
-- [ ] 
+
 

@@ -4,4 +4,6 @@ node_modules/
 .gitignore
 package-lock.json
 index.html
-README.md
+webpack.config.js
+devLog.md
+devLog.assets
