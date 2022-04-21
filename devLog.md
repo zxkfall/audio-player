@@ -1,6 +1,10 @@
 # @zxkfall/audio-player develop log
 
-## Version 1
+主版本号:次版本号:补丁版本号
+
+主版本号:向下不兼容
+
+次版本号:增加功能，向下兼容
 
 
 
@@ -20,9 +24,19 @@ Normal
 
 ### Tasking
 
-- [ ] 创建mini HTML布局
+### mini
+
+#### 1.1.0
+
+- [x] 创建mini HTML布局
 - [ ] 为mini布局添加css文件
 - [ ] 使用网络请求加载music
+
+
+
+
+
+
 
 
 
