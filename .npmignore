@@ -7,3 +7,5 @@ index.html
 webpack.config.js
 devLog.md
 devLog.assets
+cypress.json
+cypress/

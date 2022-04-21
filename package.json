@@ -4,8 +4,9 @@
   "description": "This is a module than can play music or other audio",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "serve": "live-server --port=8080"
+    "cy:open": "cypress open",
+    "serve": "live-server --port=8080",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
     "@types/node": "^17.0.24"
   },
   "devDependencies": {
+    "cypress": "^9.5.4",
     "eslint": "^8.13.0",
     "eslint-config-react-app": "^7.0.1",
     "jest": "^27.5.1",
