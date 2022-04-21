@@ -1,6 +1,5 @@
-require('./index.scss')
-const createAudioPlayer = () => {
-    console.log('CreateAudioPlayer')
+require('./index.css')
+const createAudioPlayer = async () => {
     let body = document.querySelector('body');
     let section = document.createElement('section');
     section.innerHTML = `
@@ -35,30 +34,51 @@ const createAudioPlayer = () => {
         </section>
     </section>
     `
+    const url = args.items[0].url;
+
+    // const AudioContext = window.AudioContext || window.webkitAudioContext;
+    // const audioCtx = new AudioContext();
+    // const audioData = await fetch(url).then(r => r.arrayBuffer());
+    // const decodeAudioData = await audioCtx.decodeAudioData(audioData);
+    // const sourceNode = audioCtx.createBufferSource();
+    // sourceNode.buffer = decodeAudioData;
+    // sourceNode.connect(audioCtx.destination)
+
+    const audio = document.createElement('audio');
+
     body.appendChild(section)
+    const element = document.querySelector('.audio-player-mini-play');
+    audio.src = url
+    element.addEventListener('click',function (){
+        if (audio.paused) {
+            audio.play()
+        }else {
+            audio.pause()
+        }
+    })
 
-
-
-    document.querySelector(".audio-player-mini-voice").oninput = function() {
+    document.querySelector(".audio-player-mini-voice").oninput = function () {
         console.log('sdsd')
         console.log(this.min)
-        let value = (this.value-this.min)/(this.max-this.min)*100
+        let value = (this.value - this.min) / (this.max - this.min) * 100
         this.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
     };
 
     let bottom = document.querySelector(".audio-player-mini-bottom");
     const progress = document.querySelector(".audio-player-mini-progress");
 
-    setInterval(()=>{
-        console.log("length:"+bottom.clientWidth)
-        console.log("inner:"+progress.clientWidth)
-    },1000)
+    // setInterval(() => {
+    //     console.log("length:" + bottom.clientWidth)
+    //     console.log("inner:" + progress.clientWidth)
+    // }, 1000)
 
+    document.getElementsByTagName('body')[0].style.setProperty('--audio-player-totalSize', '84px');
 
 };
+let args = {}
 
-const AudioPlayer = function () {
-    console.log('new Audio Player')
+const AudioPlayer = function ({position = 'fixed', items = []} = {}) {
+    args = {position, items}
     this.createAPlayer = createAudioPlayer
 }
 

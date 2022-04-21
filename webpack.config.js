@@ -9,7 +9,8 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/i,
+                // test: /\.s[ac]ss$/i,
+                test: /\.css$/i,
                 use: [
                     {loader: MiniCssExtractPlugin.loader},
                     // Creates `style` nodes from JS strings
@@ -21,7 +22,7 @@ module.exports = {
                         loader: "css-loader"
                     },
                     // Compiles Sass to CSS
-                    {loader: "sass-loader"},
+                    // {loader: "sass-loader"},
                 ],
             },
         ],
