@@ -29,7 +29,7 @@ Normal
 #### 1.1.0
 
 - [x] 创建mini HTML布局
-- [ ] 为mini布局添加css文件
+- [x] 为mini布局添加css文件
 - [ ] 使用网络请求加载music
 
 
