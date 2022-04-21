@@ -12,8 +12,9 @@ Hello Test
 <!--<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@zxkfall/audio-player@1.0.0/index.js"></script>-->
 
 <script type="text/javascript">
-    const audioPlayer = new window.$AudidoPlayer({items:[{url:'Aimer-Ref.flac'}]})
-    audioPlayer.createAPlayer();
+    const audioPlayer = new window.$AudidoPlayer()
+    const items = [{url: 'Aimer-Ref.flac'},{url:'https://webfs.ali.kugou.com/202204212314/8d53f15d16c50c115a0e0fa57a162a4d/KGTX/CLTX001/6f64d67c0e499c0636a85807ec0f0ec5.mp3'}];
+    audioPlayer.createAPlayer({items: items});
 </script>
 
 </body>

@@ -5,6 +5,9 @@ $titleSize: 20px;
 $bottomSize: $totalSize/14;
 
 .audio-player-mini {
+  position: fixed;
+  left: 0;
+  bottom: 16px;
   height: $totalSize;
   width: $totalSize;
   background: url("./images/flower.jpg") no-repeat center;
@@ -98,7 +101,7 @@ $bottomSize: $totalSize/14;
 
   &-progress {
     height: 100%;
-    width: 90%;
+    width: 0;
     background-color: #82CFD0;
     transition: all 0.5s cubic-bezier(0, 0.64, 0.36, 1);
   }
