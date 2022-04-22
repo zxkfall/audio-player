@@ -19,13 +19,29 @@ const pauseOrPlayAudio = (audio, modePre) => {
     })
 };
 
+const getBackground = (value) => 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)';
+
+const initVoiceBar = function (audio, modePre, initLevel = 0.2) {
+    const voice = document.querySelector(`.${modePre}-voice`);
+    const initLength = initLevel * 100;
+    voice.value = initLength
+    audio.volume = initLevel
+    voice.style.background = getBackground(initLength)
+
+    voice.oninput = function () {
+        let value = (this.value - this.min) / (this.max - this.min) * 100
+        audio.volume = value / 100
+        this.style.background = getBackground(value)
+    };
+};
+
 const getAudio = () => {
     const audio = document.createElement('audio');
     document.body.append(audio)
     return audio;
 };
 
-const updateProgress = (audio,modePre) => {
+const updateProgress = (audio, modePre) => {
     let bottom = document.querySelector(`.${modePre}-bottom`);
     const progress = document.querySelector(`.${modePre}-progress`);
 
@@ -36,4 +52,4 @@ const updateProgress = (audio,modePre) => {
     })
 };
 
-module.exports = {updateProgress,getAudio,createPlayerLayoutByMode,pauseOrPlayAudio}
+module.exports = {updateProgress, getAudio, createPlayerLayoutByMode, pauseOrPlayAudio, initVoiceBar}
