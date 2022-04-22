@@ -1,89 +1,29 @@
 require('./index.css')
+let miniMode = 'audio-player-mini'
+const util = require('./src/util')
+
+let args = {}
 const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
     args = {position, items}
-    let body = document.querySelector('body');
-    let section = document.createElement('section');
-    section.innerHTML = `
-    <section class="audio-player-mini">
-        <section class="audio-player-mini-title">
-            <button class="audio-player-mini-sound">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-volume-down" viewBox="0 0 16 16">
-                    <path d="M9 4a.5.5 0 0 0-.812-.39L5.825 5.5H3.5A.5.5 0 0 0 3 6v4a.5.5 0 0 0 .5.5h2.325l2.363 1.89A.5.5 0 0 0 9 12V4zM6.312 6.39 8 5.04v5.92L6.312 9.61A.5.5 0 0 0 6 9.5H4v-3h2a.5.5 0 0 0 .312-.11zM12.025 8a4.486 4.486 0 0 1-1.318 3.182L10 10.475A3.489 3.489 0 0 0 11.025 8 3.49 3.49 0 0 0 10 5.525l.707-.707A4.486 4.486 0 0 1 12.025 8z"/>
-                </svg>
-            </button>
-            <input class="audio-player-mini-voice" type="range" min="0" max="100">
-        </section>
-        <section class="audio-player-mini-content">
-            <button class="audio-player-mini-pre">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                    <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
-                </svg>
-            </button>
-            <button class="audio-player-mini-play">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right" viewBox="0 0 16 16">
-                    <path d="M6 12.796V3.204L11.481 8 6 12.796zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753z"/>
-                </svg>
-            </button>
-            <button class="audio-player-mini-next">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                    <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
-                </svg>
-            </button>
-        </section>
-        <section class="audio-player-mini-bottom">
-            <div class="audio-player-mini-progress"></div>
-        </section>
-    </section>
-    `
+    util.createPlayerLayoutByMode(miniMode);
+    const audio = util.getAudio();
     const musics = args.items;
-
-    const audio = document.createElement('audio');
-
-    body.appendChild(section)
-    const element = document.querySelector('.audio-player-mini-play');
     let index = 0;
     audio.src = musics[0].url
-    console.log(audio.src)
     audio.addEventListener('ended', () => {
         index++;
         audio.src = musics[index].url
         audio.play()
     })
-
-    element.addEventListener('click',  function () {
-        let isPlaying = audio.currentTime > 0 && !audio.paused && !audio.ended
-            && audio.readyState > audio.HAVE_CURRENT_DATA;
-        if (!isPlaying) {
-          audio.play()
-        } else {
-           audio.pause()
-        }
-    })
-
+    util.pauseOrPlayAudio(audio, miniMode);
     document.querySelector(".audio-player-mini-voice").oninput = function () {
         let value = (this.value - this.min) / (this.max - this.min) * 100
         this.style.background = 'linear-gradient(to right, #82CFD0 0%, #82CFD0 ' + value + '%, #fff ' + value + '%, white 100%)'
     };
-
-    let bottom = document.querySelector(".audio-player-mini-bottom");
-    const progress = document.querySelector(".audio-player-mini-progress");
-
-
-    audio.addEventListener('timeupdate', function () {
-        let percent = audio.currentTime / audio.duration
-        const number = bottom.clientWidth * percent;
-        progress.style.width = number + 'px'
-    })
-
-
+    util.updateProgress(audio, miniMode);
 };
-let args = {}
-
 const AudioPlayer = function () {
-
     this.createAPlayer = createAudioPlayer
 }
-
 window.$AudidoPlayer = AudioPlayer
-
 module.exports = AudioPlayer
