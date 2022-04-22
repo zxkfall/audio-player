@@ -7,9 +7,9 @@ This is a HTML Audio Player
 You can use it by CDN
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@zxkfall/audio-player@1.0.0/dist/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@zxkfall/audio-player/dist/style.css">
 
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@zxkfall/audio-player@1.0.0/dist/index.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@zxkfall/audio-player/dist/index.js"></script>
 ```
 
 Or you can install it by npm
@@ -63,3 +63,10 @@ audioPlayer.createAPlayer({items: items});
 
 
 
+## Contract
+
+If you have any questions,you can add your question to My Github issues.
+
+[issues](https://github.com/zxkfall/audio-player)
+
+I will deal with it when I am free.
