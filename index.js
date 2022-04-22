@@ -1,7 +1,7 @@
 require('./index.css')
 let miniMode = 'audio-player-mini'
 const util = require('./src/util')
-
+const volumeControl = require('./src/volumeControl')
 let args = {}
 
 const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
@@ -17,7 +17,7 @@ const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
         audio.play()
     })
     util.pauseOrPlayAudio(audio, miniMode);
-    util.initVoiceBar(audio, miniMode, 0.2);
+    volumeControl(audio, miniMode, 0.2);
     util.updateProgress(audio, miniMode);
 };
 const AudioPlayer = function () {
