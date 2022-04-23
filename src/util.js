@@ -37,4 +37,4 @@ const updateProgress = (audio, modePre) => {
     })
 };
 
-module.exports = {updateProgress, getAudio, createPlayerLayoutByMode, pauseOrPlayAudio}
+module.exports = {updateProgress, createAudio: getAudio, createPlayerLayoutByMode, pauseOrPlayAudio}
