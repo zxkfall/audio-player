@@ -1,5 +1,6 @@
 const getPlayerLayout = require("./playerLayout");
 const svgStore = require('./svgStore')
+const {getPlay, getPause} = require("./svgStore");
 const createPlayerLayoutByMode = (mode) => {
     let body = document.querySelector('body');
     let section = document.createElement('section');
@@ -14,11 +15,23 @@ const pauseOrPlayAudio = (audio, modePre) => {
             && audio.readyState > audio.HAVE_CURRENT_DATA;
         if (!isPlaying) {
             audio.play()
-        } else {
-            audio.pause()
+            return
         }
+        audio.pause()
     })
 };
+
+const changePlayIcon = (audio, modePre) => {
+    const playBtn = document.querySelector(`.${modePre}-play`);
+    audio.addEventListener('play', () => {
+        playBtn.innerHTML = getPlay()
+
+    })
+    audio.addEventListener('pause', () => {
+        playBtn.innerHTML = getPause()
+
+    })
+}
 
 const getAudio = () => {
     const audio = document.createElement('audio');
@@ -37,4 +50,4 @@ const updateProgress = (audio, modePre) => {
     })
 };
 
-module.exports = {updateProgress, createAudio: getAudio, createPlayerLayoutByMode, pauseOrPlayAudio}
+module.exports = {updateProgress, createAudio: getAudio, createPlayerLayoutByMode, pauseOrPlayAudio, changePlayIcon}
