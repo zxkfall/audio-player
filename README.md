@@ -57,7 +57,9 @@ audioPlayer.createAPlayer({items: items});
 
 ## Future feats
 
-- [ ] support next or pre audio
+- [x] support next or pre audio
+- [ ] show cover
+- [ ] extract picture from audio if it has cover
 - [ ] more styles
 - [ ] ...
 
