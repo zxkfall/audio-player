@@ -16,6 +16,28 @@ const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
         audio.src = musics[index].url
         audio.play()
     })
+
+    const next = document.querySelector(`.${miniMode}-next`);
+    next.addEventListener('click', () => {
+        if (index === items.length - 1) {
+            alert('already last')
+            return
+        }
+        index++;
+        audio.src = musics[index].url
+        audio.play()
+    })
+    const pre = document.querySelector(`.${miniMode}-pre`);
+    pre.addEventListener('click', () => {
+        if (index === 0) {
+            alert('already first')
+            return
+        }
+        index--;
+        audio.src = musics[index].url
+        audio.play()
+    })
+
     util.pauseOrPlayAudio(audio, miniMode);
     volumeControl(audio, miniMode, 0.2);
     util.updateProgress(audio, miniMode);
