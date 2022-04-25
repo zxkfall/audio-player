@@ -1,3 +1,4 @@
+require('./index.css')
 let miniMode = 'audio-player-mini'
 const util = require('./src/util')
 const volumeControl = require('./src/volumeControl')
@@ -5,6 +6,14 @@ const switchAudio = require('./src/switchAudio')
 let args = {}
 
 const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
+
+    const b = window.CSS && window.CSS.supports && window.CSS.supports('--background-image', "./images/flower.jpg");
+    if (b) {
+        console.log('support')
+    }else {
+        console.log('not support')
+    }
+
     args = {position, items}
     util.createPlayerLayoutByMode(miniMode);
     const audio = util.createAudio();

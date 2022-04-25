@@ -1,5 +1,4 @@
 const getPlayerLayout = require("./playerLayout");
-const svgStore = require('./svgStore')
 const {getPlay, getPause} = require("./svgStore");
 const createPlayerLayoutByMode = (mode) => {
     let body = document.querySelector('body');
@@ -33,7 +32,7 @@ const changePlayIcon = (audio, modePre) => {
     })
 }
 
-const getAudio = () => {
+const createAudio = () => {
     const audio = document.createElement('audio');
     document.body.append(audio)
     return audio;
@@ -50,4 +49,4 @@ const updateProgress = (audio, modePre) => {
     })
 };
 
-module.exports = {updateProgress, createAudio: getAudio, createPlayerLayoutByMode, pauseOrPlayAudio, changePlayIcon}
+module.exports = {updateProgress, createAudio, createPlayerLayoutByMode, pauseOrPlayAudio, changePlayIcon}

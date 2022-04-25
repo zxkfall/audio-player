@@ -3,6 +3,9 @@ $totalSize: 84px;
 $contentSize: $totalSize/3;
 $titleSize: 20px;
 $bottomSize: $totalSize/14;
+:root {
+  --background-image: url("./images/flower.jpg");
+}
 
 .audio-player-mini {
   position: fixed;
@@ -10,7 +13,7 @@ $bottomSize: $totalSize/14;
   bottom: 16px;
   height: $totalSize;
   width: $totalSize;
-  background: url("./images/flower.jpg") no-repeat center;
+  background: var(--background-image) no-repeat center;
   background-size: cover;
 
   &-title {

@@ -31,7 +31,7 @@ For NPM，you can use it like this
 
 ```js
 const audioPlayer = new AudidoPlayer()
-const items = [{url: 'localMusic.flac'},{url:'https://me.mp3'}];
+const items = [{url: 'localMusic.flac',cover:'image.jpg'},{url:'https://me.mp3',cover:'https://image.png'}];
 audioPlayer.createAPlayer({items: items});
 ```
 
@@ -43,8 +43,6 @@ const items = [{url: 'localMusic.flac'},{url:'https://me.mp3'}];
 audioPlayer.createAPlayer({items: items});
 ```
 
-
-
 For CDN,you can use it like this
 
 ```bash
@@ -53,12 +51,16 @@ const items = [{url: 'localMusic.flac'},{url:'https://me.mp3'}];
 audioPlayer.createAPlayer({items: items});
 ```
 
+If your are use react,you need to import image or music like this
 
+```js
+import Me from './me.flac';
+```
 
 ## Future feats
 
 - [x] support next or pre audio
-- [ ] show cover
+- [x] show cover
 - [ ] extract picture from audio if it has cover
 - [ ] more styles
 - [ ] ...
