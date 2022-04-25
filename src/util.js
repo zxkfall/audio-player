@@ -49,4 +49,20 @@ const updateProgress = (audio, modePre) => {
     })
 };
 
-module.exports = {updateProgress, createAudio, createPlayerLayoutByMode, pauseOrPlayAudio, changePlayIcon}
+const isSupportedCssVar = () => {
+    const b = window.CSS && window.CSS.supports && window.CSS.supports('--background-image', "./images/flower.jpg");
+    if (b) {
+        console.log('support CSS var')
+    } else {
+        console.log('not support CSS var')
+    }
+}
+
+module.exports = {
+    updateProgress,
+    createAudio,
+    createPlayerLayoutByMode,
+    pauseOrPlayAudio,
+    changePlayIcon,
+    isSupportedCssVar
+}

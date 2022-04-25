@@ -6,16 +6,15 @@ const playByIndex = (audio, musics) => {
     const cover = musics[index].cover;
     audio.play()
     setMusicCover(cover)
-    // let priority = getComputedStyle(document.documentElement).getPropertyValue('--background-image');
 };
 
-function setMusicCover(cover) {
+const setMusicCover = (cover) => {
     if (cover) {
         document.documentElement.style.setProperty('--background-image', `url('${cover}')`)
     } else {
         document.documentElement.style.setProperty('--background-image', `url('https://avatars.githubusercontent.com/u/42455616?v=4')`)
     }
-}
+};
 
 const naturalSwitch = (audio, musics) => {
     audio.src = musics[0].url

@@ -6,14 +6,7 @@ const switchAudio = require('./src/switchAudio')
 let args = {}
 
 const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
-
-    const b = window.CSS && window.CSS.supports && window.CSS.supports('--background-image', "./images/flower.jpg");
-    if (b) {
-        console.log('support')
-    }else {
-        console.log('not support')
-    }
-
+    util.isSupportedCssVar()
     args = {position, items}
     util.createPlayerLayoutByMode(miniMode);
     const audio = util.createAudio();
