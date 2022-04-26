@@ -16,6 +16,10 @@ $bottomSize: $totalSize/14;
   background: var(--background-image) no-repeat center;
   background-size: cover;
 
+  &-mask {
+    background-color: rgba(0, 0, 0, 0);
+  }
+
   &-title {
     display: flex;
     justify-content: center;
@@ -36,6 +40,10 @@ $bottomSize: $totalSize/14;
       width: $defaultSize;
       height: $defaultSize;
     }
+  }
+
+  &:hover &-mask {
+    background-color: rgba(0, 0, 0, 0.3);
   }
 
   &:hover &-voice {

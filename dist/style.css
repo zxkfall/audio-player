@@ -1,5 +1,5 @@
 :root {
-  --background-image: url("https://avatars.githubusercontent.com/u/42455616?v=4");
+  --background-image: url(ad88adc12d2836e7c396.jpg);
 }
 
 .audio-player-mini {
@@ -10,6 +10,9 @@
   width: 84px;
   background: var(--background-image) no-repeat center;
   background-size: cover;
+}
+.audio-player-mini-mask {
+  background-color: rgba(0, 0, 0, 0);
 }
 .audio-player-mini-title {
   display: flex;
@@ -29,6 +32,9 @@
 .audio-player-mini-sound svg {
   width: 20px;
   height: 20px;
+}
+.audio-player-mini:hover .audio-player-mini-mask {
+  background-color: rgba(0, 0, 0, 0.3);
 }
 .audio-player-mini:hover .audio-player-mini-voice {
   visibility: visible;
