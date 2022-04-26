@@ -1,3 +1,4 @@
+// const jsmediatags = require('jsmediatags/dist/jsmediatags.min')
 let index = 0;
 let nextButtonClass;
 let preButtonClass;
@@ -15,6 +16,21 @@ const setMusicCover = (cover) => {
         document.documentElement.style.setProperty('--background-image', `url('https://avatars.githubusercontent.com/u/42455616?v=4')`)
     }
 };
+// let myUrl;
+// const getCoverFromMusic = (url) => {
+//     // getCoverFromMusic(window.location.protocol+'//'+window.location.host+'/'+mySrc)
+//
+//     jsmediatags.read(url, {
+//         onSuccess: function (tag) {
+//             myUrl = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, new Uint8Array(tag.tags.picture.data)));
+//             setMusicCover(myUrl)
+//         },
+//         onError: function (error) {
+//             console.log(error);
+//         }
+//     });
+// }
+
 
 const naturalSwitch = (audio, musics) => {
     audio.src = musics[0].url
