@@ -62,7 +62,8 @@ import Me from './me.flac';
 - [x] support next or pre audio
 - [x] show cover
 - [ ] extract picture from audio if it has cover
-  - [ ] will get cover from flac music if not cover attribute
+  - [x] will get cover from FLAC music if not cover attribute，if music has not inner cover and item not cover attribute，it will show default image
+  - [ ] get cover from mp3 music
 - [ ] more styles
 - [ ] ...
 
