@@ -32,16 +32,14 @@ const parseCover = async (item) => {
                     const imageType = String.fromCharCode.apply(null, array.slice(pos, pos + mimeSize));
                     pos += mimeSize;
                     let descriptionSize = getElSize(array, pos);
-                    pos = pos + 4;
-                    pos += descriptionSize;
+                    pos = pos + 4 + descriptionSize;
                     pos = pos + 4 * 4;
                     let imageSize = getElSize(array, pos);
                     pos = pos + 4;
                     let imageData = array.slice(pos, pos + imageSize);
-                    // return `data:${imageType};base64,${window.btoa(String.fromCharCode(...imageData))}`
                     const base64 = imageData.reduce((data, byte) => {
                         return data + String.fromCharCode(byte);
-                    },'');
+                    }, '');
                     return `data:${imageType};base64,${(window.btoa(base64.toString()))}`
                 }
                 pos += size;
@@ -82,7 +80,7 @@ const naturalSwitch = async (audio, musics) => {
     })
 };
 
-const changeAudio = (audio, musics, items, mode) => {
+const changeAudio = (audio, musics, mode) => {
     nextButtonClass = `.${mode}-next`;
     preButtonClass = `.${mode}-pre`;
     naturalSwitch(audio, musics);
