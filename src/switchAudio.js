@@ -4,9 +4,9 @@ let nextButtonClass;
 let preButtonClass;
 
 const parseCover = async (item) => {
-    const cover = item.src;
+    const cover = item.cover;
     if (cover) {
-        return item.src;
+        return item.cover;
     }
     const sourceUrl = item.url;
     let pos = 0;

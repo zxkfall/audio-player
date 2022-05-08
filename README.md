@@ -39,7 +39,7 @@ Or
 
 ```bash
 const audioPlayer = new window.$AudidoPlayer()
-const items = [{url: 'localMusic.flac'},{url:'https://me.mp3'}];
+const items = [{url: 'localMusic.flac',cover:'image.jpg'},{url:'https://me.mp3',cover:'https://image.png'}];
 audioPlayer.createAPlayer({items: items});
 ```
 
@@ -47,7 +47,7 @@ For CDN,you can use it like this
 
 ```bash
 const audioPlayer = new window.$AudidoPlayer()
-const items = [{url: 'localMusic.flac'},{url:'https://me.mp3'}];
+const items = [{url: 'localMusic.flac',cover:'image.jpg'},{url:'https://me.mp3',cover:'https://image.png'}];
 audioPlayer.createAPlayer({items: items});
 ```
 
@@ -62,6 +62,7 @@ import Me from './me.flac';
 - [x] support next or pre audio
 - [x] show cover
 - [ ] extract picture from audio if it has cover
+  - [ ] will get cover from flac music if not cover attribute
 - [ ] more styles
 - [ ] ...
 
