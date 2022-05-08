@@ -1,4 +1,4 @@
-const getPlayerLayout = (layoutMode) => {
+const getLayout = (layoutMode) => {
     return `
     <section class="${layoutMode}">
         <section class="${layoutMode}-mask">
@@ -35,4 +35,4 @@ const getPlayerLayout = (layoutMode) => {
     `;
 }
 
-module.exports = getPlayerLayout
+module.exports = getLayout

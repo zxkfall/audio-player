@@ -13,15 +13,15 @@ const initVolumeAndBindElement = (modePre, initLevel, audio) => {
     changeBackground(voice.value);
 };
 
-function updateVolume(audio) {
+const updateVolume = audio => {
     audio.muted = false
     const value = (voice.value - voice.min) / (voice.max - voice.min) * 100
     audio.volume = value / 100
     changeBackground(value);
     sound.innerHTML = svgStore.getUnMuted()
-}
+};
 
-function updateMute(audio) {
+const updateMute = (audio) => {
     audio.muted = !audio.muted
     if (audio.muted) {
         voice.value = 0
@@ -32,7 +32,7 @@ function updateMute(audio) {
     voice.value = audio.volume * 100
     voice.dispatchEvent(new Event('input'))
     sound.innerHTML = svgStore.getUnMuted()
-}
+};
 
 const volumeControl = (audio, modePre, initLevel = 0.2) => {
     initVolumeAndBindElement(modePre, initLevel, audio);
