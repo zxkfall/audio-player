@@ -11,7 +11,7 @@ const createAudioPlayer = async ({position = 'fixed', items = []} = {}) => {
     util.createPlayerLayoutByMode(miniMode);
     const audio = util.createAudio();
     const musics = args.items;
-    switchAudio.changeAudio(audio, musics, items, miniMode);
+    switchAudio.changeAudio(audio, musics, miniMode);
     util.pauseOrPlayAudio(audio, miniMode);
     util.changePlayIcon(audio, miniMode)
     volumeControl(audio, miniMode, 0.2);

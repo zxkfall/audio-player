@@ -1,6 +1,6 @@
 {
   "name": "@zxkfall/audio-player",
-  "version": "1.4.1",
+  "version": "1.4.2",
   "description": "This is a module than can play music or other audio",
   "main": "index.js",
   "scripts": {
