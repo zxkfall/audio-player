@@ -12,8 +12,8 @@ const parseCover = async (item) => {
     let pos = 0;
     if (sourceUrl.endsWith('.flac')) {
         const response = await fetch(sourceUrl, {method: 'GET'})
-        const data = await response.arrayBuffer()
-        const array = new Uint8Array(data);
+        const responseData = await response.arrayBuffer()
+        const array = new Uint8Array(responseData);
         const tag = String.fromCharCode.apply(null, array.slice(0, 4));
         pos = pos + 4;
         if (tag === 'fLaC') {
@@ -38,7 +38,11 @@ const parseCover = async (item) => {
                     let imageSize = getElSize(array, pos);
                     pos = pos + 4;
                     let imageData = array.slice(pos, pos + imageSize);
-                    return `data:${imageType};base64,${window.btoa(String.fromCharCode(...imageData))}`
+                    // return `data:${imageType};base64,${window.btoa(String.fromCharCode(...imageData))}`
+                    const base64 = imageData.reduce((data, byte) => {
+                        return data + String.fromCharCode(byte);
+                    },'');
+                    return `data:${imageType};base64,${(window.btoa(base64.toString()))}`
                 }
                 pos += size;
             } while (lastFlag !== 1)
