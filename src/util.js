@@ -58,11 +58,22 @@ const isSupportedCssVar = () => {
     }
 }
 
+const getElSize = (array, pos) => (array[pos] << 24) +
+    (array[pos + 1] << 16) +
+    (array[pos + 2] << 8) +
+    array[pos + 3];
+
+const getContentSize = (array, pos) => (array[pos] << 16) +
+    (array[pos + 1] << 8) +
+    array[pos + 2];
+
 module.exports = {
     updateProgress,
     createAudio,
     createPlayerLayoutByMode,
     pauseOrPlayAudio,
     changePlayIcon,
-    isSupportedCssVar
+    isSupportedCssVar,
+    getElSize,
+    getContentSize
 }

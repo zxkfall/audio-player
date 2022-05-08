@@ -1,9 +1,55 @@
+const {getElSize, getContentSize} = require('./util')
 let index = 0;
 let nextButtonClass;
 let preButtonClass;
-const playByIndex = (audio, musics) => {
+
+const parseCover = async (item) => {
+    const cover = item.src;
+    if (cover) {
+        return item.src;
+    }
+    const sourceUrl = item.url;
+    let pos = 0;
+    if (sourceUrl.endsWith('.flac')) {
+        const response = await fetch(sourceUrl, {method: 'GET'})
+        const data = await response.arrayBuffer()
+        const array = new Uint8Array(data);
+        const tag = String.fromCharCode.apply(null, array.slice(0, 4));
+        pos = pos + 4;
+        if (tag === 'fLaC') {
+            let flag = 0;
+            let lastFlag
+            do {
+                flag = array[pos] & 0x7f
+                lastFlag = (array[0] & 0xff) >> 7;
+                pos++;
+                const size = getContentSize(array, pos);
+                pos += 3;
+                if (flag === 6) {
+                    pos = pos + 4;
+                    let mimeSize = getElSize(array, pos);
+                    pos = pos + 4;
+                    const imageType = String.fromCharCode.apply(null, array.slice(pos, pos + mimeSize));
+                    pos += mimeSize;
+                    let descriptionSize = getElSize(array, pos);
+                    pos = pos + 4;
+                    pos += descriptionSize;
+                    pos = pos + 4 * 4;
+                    let imageSize = getElSize(array, pos);
+                    pos = pos + 4;
+                    let imageData = array.slice(pos, pos + imageSize);
+                    return `data:${imageType};base64,${window.btoa(String.fromCharCode(...imageData))}`
+                }
+                pos += size;
+            } while (lastFlag !== 1)
+        }
+
+    }
+}
+
+const playByIndex = async (audio, musics) => {
     audio.src = musics[index].url
-    const cover = musics[index].cover;
+    const cover = await parseCover(musics[index])
     audio.play()
     setMusicCover(cover)
 };
@@ -16,9 +62,12 @@ const setMusicCover = (cover) => {
     }
 };
 
-const naturalSwitch = (audio, musics) => {
+const naturalSwitch = async (audio, musics) => {
     audio.src = musics[0].url
-    const cover = musics[index].cover;
+    let cover = musics[index].cover;
+    if (!cover || cover.length === 0) {
+        cover = await parseCover(musics[index])
+    }
     setMusicCover(cover);
     audio.addEventListener('ended', () => {
         console.log(index)
