@@ -1,4 +1,12 @@
-const {getContentSize, getElSize, uint8ToBase64, getID3TotalSize, getID3FrameSize} = require("./util");
+const {
+    getContentSize,
+    getElSize,
+    uint8ToBase64,
+    getID3TotalSize,
+    getID3FrameSize,
+    getArrayData,
+    getTextSize
+} = require("./util");
 
 const parseCover = async (item) => {
     const cover = item.cover;
@@ -8,9 +16,7 @@ const parseCover = async (item) => {
     const sourceUrl = item.url;
     let pos = 0;
     if (sourceUrl.endsWith('.flac')) {
-        const response = await fetch(sourceUrl, {method: 'GET'})
-        const responseData = await response.arrayBuffer()
-        const array = new Uint8Array(responseData);
+        const array = await getArrayData(sourceUrl);
         const tagFLAC = String.fromCharCode.apply(null, array.slice(0, 4));
         if (tagFLAC === 'fLaC') {
             pos = pos + 4;
@@ -40,16 +46,12 @@ const parseCover = async (item) => {
             } while (lastFlag !== 1)
         }
     } else if (sourceUrl.endsWith('.mp3')) {
-        const response = await fetch(sourceUrl, {method: 'GET'})
-        const responseData = await response.arrayBuffer()
-        const array = new Uint8Array(responseData);
+        const array = await getArrayData(sourceUrl);
         const tagID3v2 = String.fromCharCode.apply(null, array.slice(0, 3));
-        pos = 0;
         if (tagID3v2 === 'ID3') {
             pos = pos + 6;
             const totalSize = getID3TotalSize(array, pos);
             pos = pos + 4;
-            console.log(totalSize)
             do {
                 let contentHeadSize = 0;
                 const frameID = String.fromCharCode.apply(null, array.slice(pos, pos + 4));
@@ -57,29 +59,16 @@ const parseCover = async (item) => {
                 if (frameSize === 0) {
                     break;
                 }
-                console.log(pos + ':' + frameID + ':' + frameSize)
                 contentHeadSize += 10;
                 if (frameID === "APIC") {
-                    let size = 0;
-                    for (let i = pos + contentHeadSize + 2; i < array.length; i++) {
-                        size++;
-                        if (array[i] === 0) {
-                            break;
-                        }
-                    }
-                    console.log('size:' + size)
-                    const mimeType = String.fromCharCode.apply(null, array.slice(pos + contentHeadSize + 1, pos + contentHeadSize + 1 + size));
+                    let size = getTextSize(pos, contentHeadSize, array);
+                    let start = pos + contentHeadSize + 1;
+                    const mimeType = String.fromCharCode.apply(null, array.slice(start, start + size));
                     contentHeadSize = contentHeadSize + 1 + size;
-                    console.log('type:' + mimeType)
-                    size = 0;
-                    for (let i = pos + contentHeadSize + 2; i < array.length; i++) {
-                        size++;
-                        if (array[i] === 0) {
-                            break;
-                        }
-                    }
+                    size = getTextSize(pos, contentHeadSize, array);
                     contentHeadSize = contentHeadSize + 1 + size;
-                    let imageData = array.slice(pos + contentHeadSize + 1, pos + contentHeadSize + 1 + frameSize);
+                    start = pos + contentHeadSize + 1;
+                    let imageData = array.slice(start, start + frameSize);
                     return uint8ToBase64(imageData, mimeType);
                 }
                 pos = pos + frameSize + 10;

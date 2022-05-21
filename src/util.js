@@ -24,6 +24,23 @@ const uint8ToBase64 = (uint8, type) => {
     return `data:${type};base64,${(window.btoa(str.toString()))}`
 };
 
+const getArrayData = async (sourceUrl) => {
+    const response = await fetch(sourceUrl, {method: 'GET'})
+    const responseData = await response.arrayBuffer()
+    return new Uint8Array(responseData);
+};
+
+const getTextSize = (pos, contentHeadSize, array) => {
+    let size = 0;
+    for (let i = pos + contentHeadSize + 2; i < array.length; i++) {
+        size++;
+        if (array[i] === 0) {
+            break;
+        }
+    }
+    return size;
+};
+
 const isSupportedCssVar = () => {
     const b = window.CSS && window.CSS.supports && window.CSS.supports('--background-image', "./images/flower.jpg");
     if (b) {
@@ -33,4 +50,13 @@ const isSupportedCssVar = () => {
     }
 }
 
-module.exports = {getContentSize, getElSize, isSupportedCssVar, uint8ToBase64, getID3TotalSize, getID3FrameSize}
+module.exports = {
+    getContentSize,
+    getElSize,
+    isSupportedCssVar,
+    uint8ToBase64,
+    getID3TotalSize,
+    getID3FrameSize,
+    getArrayData,
+    getTextSize
+}
