@@ -1,4 +1,4 @@
-const parseCover = require('./musicParse')
+const parseCover = require('./cover')
 let index = 0;
 let myAudio;
 let items;

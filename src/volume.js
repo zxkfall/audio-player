@@ -1,4 +1,4 @@
-const svgStore = require("./svgStore");
+const svgStore = require("./svg");
 let voice;
 let sound;
 const changeBackground = (initLength) => {
